@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=block" rel="stylesheet"/>
+    <link href="tailwind.css" rel="stylesheet"/>
+    <style>
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        
+        .abstract-lines-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+            background-image: url("data:image/svg+xml,%3Csvg width='800' height='800' viewBox='0 0 800 800' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 100 Q 200 0 400 100 T 800 100' stroke='%239ca3af' fill='transparent' stroke-width='1'/%3E%3Cpath d='M0 200 Q 200 100 400 200 T 800 200' stroke='%239ca3af' fill='transparent' stroke-width='1'/%3E%3Cpath d='M0 300 Q 200 200 400 300 T 800 300' stroke='%239ca3af' fill='transparent' stroke-width='1'/%3E%3Cpath d='M0 400 Q 200 300 400 400 T 800 400' stroke='%239ca3af' fill='transparent' stroke-width='1'/%3E%3Cpath d='M0 500 Q 200 400 400 500 T 800 500' stroke='%239ca3af' fill='transparent' stroke-width='1'/%3E%3Cpath d='M0 600 Q 200 500 400 600 T 800 600' stroke='%239ca3af' fill='transparent' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: cover;
+            pointer-events: none;
+        }
+
+        .metallic-silver {
+            background: linear-gradient(135deg, #e0e0e0 0%, #ffffff 50%, #d1d1d1 100%);
+            position: relative;
+        }
+        
+        .metallic-silver::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            opacity: 0.3;
+            background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 100 0 200 50 T 400 50' stroke='%239ca3af' fill='transparent' stroke-width='1'/%3E%3Cpath d='M0 150 Q 100 100 200 150 T 400 150' stroke='%239ca3af' fill='transparent' stroke-width='1'/%3E%3Cpath d='M0 250 Q 100 200 200 250 T 400 250' stroke='%239ca3af' fill='transparent' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: cover;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .credential-shadow {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col relative bg-background">
+    <!-- Abstract Lines Background -->
+    <div class="abstract-lines-bg"></div>
+    
+    <!-- Top AppBar -->
+    <header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface/90 backdrop-blur-sm border-b border-outline-variant transition-colors duration-200">
+        <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">shield</span>
+            <span class="font-headline-md text-headline-md font-bold text-primary">Sindicato de la Carne</span>
+        </div>
+        <div class="relative flex items-center">
+            <button id="user-menu-btn" class="p-2 rounded-full hover:bg-surface-container transition-colors focus:outline-none">
+                <span class="material-symbols-outlined text-on-surface-variant">account_circle</span>
+            </button>
+            <!-- Floating User Dropdown Menu -->
+            <div id="user-dropdown" class="hidden absolute right-0 top-12 w-48 bg-white rounded-lg shadow-lg border border-outline-variant py-1 z-50">
+                <button onclick="sendFlutterMessage('logout')" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center gap-2 font-body-md">
+                    <span class="material-symbols-outlined text-[18px]">logout</span>
+                    Cerrar sesión
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow pt-20 pb-32">
+        <!-- Continuous Marquee Section -->
+        <section class="w-full bg-primary overflow-hidden py-3 mb-10">
+            <div class="animate-marquee whitespace-nowrap">
+                <span class="text-white font-headline-md text-headline-md font-extrabold px-4">O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • </span>
+                <span class="text-white font-headline-md text-headline-md font-extrabold px-4">O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • O.S.F.G.P.I.CyD • </span>
+            </div>
+        </section>
+        
+        <div class="px-margin-page max-w-md mx-auto">
+            <!-- Digital ID Card Container (Metallic Silver with Pattern) -->
+            <div class="relative w-full rounded-xl overflow-hidden credential-shadow mb-8 border border-outline-variant metallic-silver transition-transform duration-500 ease-out">
+                <!-- Card Content -->
+                <div class="relative z-10 h-full p-6 flex flex-col justify-between">
+                    <!-- Card Top Row -->
+                    <div class="flex justify-between items-start">
+                        <!-- Local permanent logo file -->
+                        <img alt="Logo Sindicato" class="h-16 w-auto object-contain" src="./logo_sindicato.jpg"/>
+                        <div class="flex flex-col items-end">
+                            <span id="user-status" class="bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label-caps text-label-caps border border-secondary shadow-sm">ACTIVO</span>
+                            <span id="user-vto" class="font-label-caps text-[10px] mt-1.5 text-on-surface-variant font-bold">Vto: 12/2025</span>
+                        </div>
+                    </div>
+                    <!-- Card Body Row -->
+                    <div class="flex flex-col justify-center flex-grow mt-4 gap-3">
+                        <div>
+                            <p class="font-label-caps text-label-caps text-primary mb-1">NOMBRE Y APELLIDO</p>
+                            <p id="user-name" class="font-id-name text-2xl text-on-surface">Silva Alejandro</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="font-label-caps text-label-caps text-primary mb-1">DNI</p>
+                                <p id="user-dni" class="font-id-data text-xl text-on-surface font-semibold">12.345.678</p>
+                            </div>
+                            <div>
+                                <p class="font-label-caps text-label-caps text-primary mb-1">NRO AFILIADO</p>
+                                <p id="user-affiliate" class="font-id-data text-xl text-on-surface font-semibold">123456/0</p>
+                            </div>
+                        </div>
+                        <!-- Added Establecimiento Field -->
+                        <div>
+                            <p class="font-label-caps text-label-caps text-primary mb-1">ESTABLECIMIENTO</p>
+                            <p id="user-establishment" class="font-id-data text-xl text-on-surface font-semibold truncate">Ejemplo S.A.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- BottomNavBar -->
+    <nav class="fixed bottom-0 w-full z-50 flex justify-center items-center h-20 pb-safe bg-white border-t border-outline-variant shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+        <a class="flex flex-col items-center justify-center flex-1 h-full text-primary border-r border-outline-variant/30" href="#" onclick="reloadCredential(); return false;">
+            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">badge</span>
+            <span class="font-label-caps text-[12px] mt-1 font-bold">Credencial</span>
+        </a>
+        <a class="flex flex-col items-center justify-center flex-1 h-full text-on-surface-variant hover:text-primary transition-colors" href="#" onclick="sendFlutterMessage('news'); return false;">
+            <span class="material-symbols-outlined text-3xl">newspaper</span>
+            <span class="font-label-caps text-[12px] mt-1 font-bold">Novedades</span>
+        </a>
+    </nav>
+
+    <script>
+        // Send messages to Flutter Webview channel
+        function sendFlutterMessage(action) {
+            if (window.FlutterChannel) {
+                window.FlutterChannel.postMessage(action);
+            } else {
+                console.log("FlutterChannel not found. Action:", action);
+            }
+        }
+
+        // Reload credential action
+        function reloadCredential() {
+            sendFlutterMessage('credential');
+            window.location.reload();
+        }
+
+        // User dropdown menu interaction
+        const userMenuBtn = document.getElementById('user-menu-btn');
+        const userDropdown = document.getElementById('user-dropdown');
+
+        if (userMenuBtn && userDropdown) {
+            userMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                userDropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', () => {
+                userDropdown.classList.add('hidden');
+            });
+        }
+
+        // Parse query parameters and populate dynamic data
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        function formatDNI(dni) {
+            if (!dni) return '';
+            const clean = dni.toString().replace(/\D/g, '');
+            return clean.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dni = getQueryParam('dni');
+            const nombre = getQueryParam('nombre');
+            const nro = getQueryParam('nro');
+            const estab = getQueryParam('estab');
+            const vto = getQueryParam('vto');
+            const status = getQueryParam('status');
+
+            if (nombre) {
+                document.getElementById('user-name').textContent = nombre;
+            }
+            if (dni) {
+                document.getElementById('user-dni').textContent = formatDNI(dni);
+            }
+            if (nro) {
+                document.getElementById('user-affiliate').textContent = nro;
+            }
+            if (estab) {
+                document.getElementById('user-establishment').textContent = estab;
+            }
+            if (vto) {
+                // Ensure it formats as "Vto: DD/MM/YYYY" or "Vto: MM/YYYY"
+                document.getElementById('user-vto').textContent = vto.startsWith('Vto:') ? vto : `Vto: ${vto}`;
+            }
+            if (status) {
+                const statusEl = document.getElementById('user-status');
+                statusEl.textContent = status.toUpperCase();
+                if (status.toUpperCase() === 'INACTIVO' || status.toUpperCase() === 'VENCIDO') {
+                    statusEl.className = "bg-red-100 text-red-800 px-3 py-1 rounded-full font-label-caps text-label-caps border border-red-300 shadow-sm";
+                }
+            }
+        });
+
+        // Simple tilt effect for the card
+        const card = document.querySelector('.metallic-silver');
+        if (card && window.innerWidth > 768) {
+            document.addEventListener('mousemove', (e) => {
+                const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+                const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+                card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+            });
+            document.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateY(0deg) rotateX(0deg)';
+            });
+        }
+    </script>
+</body>
+</html>
