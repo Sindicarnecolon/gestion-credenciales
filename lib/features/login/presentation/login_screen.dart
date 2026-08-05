@@ -286,7 +286,7 @@ class _WaveLogoSection extends StatelessWidget {
                 ),
                 child: ClipOval(
                   child: Image.asset(
-                    'assets/images/logo_sindicato.jpg',
+                    'assets/images/logo.png',
                     fit: BoxFit.cover,
                   ),
                 ),
