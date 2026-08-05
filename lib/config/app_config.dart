@@ -13,10 +13,7 @@ class AppConfig {
 
   // ------------ URLs de WebViews ------------
   /// URL de la WebView de la Credencial. Si está vacía, se mostrará el mensaje correspondiente.
-  static const String webviewCredentialUrl = '';
-
-  /// URL de la WebView del Grupo Familiar. Si está vacía, se mostrará el mensaje correspondiente.
-  static const String webviewGroupUrl = '';
+  static const String webviewCredentialUrl = 'https://sindicarnecolon.github.io/gestion-credenciales/';
 
   // ------------ APIs (Preparado para backend futuro) ------------
   /// Endpoint de autenticación (Google Apps Script / Sheets backend)
@@ -39,8 +36,6 @@ class AppConfig {
   // ------------ Mensajes del sistema ------------
   static const String msgCredentialNotConfigured =
       'La credencial aún no fue configurada.';
-  static const String msgGroupNotConfigured =
-      'Formulario aún no configurado.';
   static const String msgCredentialExpired =
       'Su credencial se encuentra vencida.';
   static const String btnContactAdmin = 'Contactar Administración';

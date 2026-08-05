@@ -70,16 +70,13 @@ class _CredentialScreenState extends ConsumerState<CredentialScreen> {
     final user = ref.read(authProvider).user;
     String url = AppConfig.webviewCredentialUrl;
     if (user != null && url.isNotEmpty) {
-      final vtoStr = user.expirationDate != null
-          ? '${user.expirationDate!.day.toString().padLeft(2, '0')}/${user.expirationDate!.month.toString().padLeft(2, '0')}/${user.expirationDate!.year}'
-          : '';
       final uri = Uri.parse(url).replace(
         queryParameters: {
           'dni': user.dni,
           'nombre': user.fullName,
           'nro': user.affiliateNumber,
           'estab': user.establishment,
-          'vto': vtoStr,
+          'vto': user.vtoRaw,
           'status': user.isExpired ? 'vencido' : 'activo',
         },
       );

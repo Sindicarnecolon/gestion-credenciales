@@ -7,6 +7,9 @@ class UserModel {
   final String affiliateNumber;
   final String establishment;
   final DateTime? expirationDate;
+  /// Valor original del campo Vto tal como viene del Google Sheet (ej: "12/2026" o "31/12/2026").
+  /// Se usa para mostrar en el HTML sin depender del parsing de fecha.
+  final String vtoRaw;
 
   const UserModel({
     required this.dni,
@@ -14,6 +17,7 @@ class UserModel {
     this.affiliateNumber = '',
     this.establishment = '',
     this.expirationDate,
+    this.vtoRaw = '',
   });
 
   /// Retorna true si la credencial está vencida
@@ -28,6 +32,7 @@ class UserModel {
         'affiliateNumber': affiliateNumber,
         'establishment': establishment,
         'expirationDate': expirationDate?.toIso8601String(),
+        'vtoRaw': vtoRaw,
       };
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -38,5 +43,6 @@ class UserModel {
         expirationDate: json['expirationDate'] != null
             ? DateTime.tryParse(json['expirationDate'] as String)
             : null,
+        vtoRaw: json['vtoRaw'] as String? ?? '',
       );
 }

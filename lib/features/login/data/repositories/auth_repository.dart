@@ -55,6 +55,7 @@ class AuthRepository {
             affiliateNumber: data['nroAfiliado'] as String? ?? '',
             establishment: data['establecimiento'] as String? ?? '',
             expirationDate: expDate,
+            vtoRaw: vtoStr ?? '',
           );
         } else {
           throw Exception(

@@ -61,6 +61,7 @@ class AuthNotifier extends Notifier<AuthState> {
         final affiliateNumber = await storage.getAffiliateNumber() ?? '';
         final establishment = await storage.getEstablishment() ?? '';
         final expirationRaw = await storage.getExpirationDate() ?? '';
+        final vtoRaw = await storage.getVtoRaw() ?? '';
         DateTime? expDate;
         if (expirationRaw.isNotEmpty) {
           expDate = DateTime.tryParse(expirationRaw);
@@ -74,6 +75,7 @@ class AuthNotifier extends Notifier<AuthState> {
             affiliateNumber: affiliateNumber,
             establishment: establishment,
             expirationDate: expDate,
+            vtoRaw: vtoRaw,
           ),
         );
         return;
@@ -100,6 +102,7 @@ class AuthNotifier extends Notifier<AuthState> {
         affiliateNumber: user.affiliateNumber,
         establishment: user.establishment,
         expirationDate: user.expirationDate?.toIso8601String() ?? '',
+        vtoRaw: user.vtoRaw,
       );
 
       state = state.copyWith(

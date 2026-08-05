@@ -12,6 +12,7 @@ class StorageService {
   static const String _keyAffiliateNumber = 'user_affiliate_number';
   static const String _keyEstablishment = 'user_establishment';
   static const String _keyExpirationDate = 'user_expiration_date';
+  static const String _keyVtoRaw = 'user_vto_raw';
   static const String _keyIsLoggedIn = 'is_logged_in';
 
   /// Guarda todos los datos de sesión del usuario
@@ -21,12 +22,14 @@ class StorageService {
     String affiliateNumber = '',
     String establishment = '',
     String expirationDate = '',
+    String vtoRaw = '',
   }) async {
     await _storage.write(key: _keyDni, value: dni);
     await _storage.write(key: _keyFullName, value: fullName);
     await _storage.write(key: _keyAffiliateNumber, value: affiliateNumber);
     await _storage.write(key: _keyEstablishment, value: establishment);
     await _storage.write(key: _keyExpirationDate, value: expirationDate);
+    await _storage.write(key: _keyVtoRaw, value: vtoRaw);
     await _storage.write(key: _keyIsLoggedIn, value: 'true');
   }
 
@@ -35,6 +38,7 @@ class StorageService {
   Future<String?> getAffiliateNumber() async => _storage.read(key: _keyAffiliateNumber);
   Future<String?> getEstablishment() async => _storage.read(key: _keyEstablishment);
   Future<String?> getExpirationDate() async => _storage.read(key: _keyExpirationDate);
+  Future<String?> getVtoRaw() async => _storage.read(key: _keyVtoRaw);
 
   /// Comprueba si hay una sesión activa
   Future<bool> isLoggedIn() async {

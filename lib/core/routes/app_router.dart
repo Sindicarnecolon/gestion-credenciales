@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/credential/presentation/credential_screen.dart';
-import '../../features/group_family/presentation/group_family_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/login/presentation/login_screen.dart';
 import '../../features/login/providers/auth_provider.dart';
@@ -63,10 +62,6 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/credential',
         builder: (context, state) => const CredentialScreen(),
-      ),
-      GoRoute(
-        path: '/group-family',
-        builder: (context, state) => const GroupFamilyScreen(),
       ),
       GoRoute(
         path: '/news',

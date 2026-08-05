@@ -130,15 +130,6 @@ class HomeScreen extends ConsumerWidget {
               const SizedBox(height: 12),
 
               _HomeMenuCard(
-                title: 'Grupo Familiar',
-                subtitle: 'Formulario de integrantes del grupo',
-                icon: Icons.family_restroom_outlined,
-                color: const Color(0xFF00897B),
-                onTap: () => context.push('/group-family'),
-              ),
-              const SizedBox(height: 12),
-
-              _HomeMenuCard(
                 title: 'Novedades y Anuncios',
                 subtitle: 'Últimas noticias y comunicaciones',
                 icon: Icons.newspaper_outlined,
