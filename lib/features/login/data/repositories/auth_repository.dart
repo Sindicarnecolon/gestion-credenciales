@@ -49,13 +49,21 @@ class AuthRepository {
             expDate = _parseDate(vtoStr);
           }
 
+          String formattedVto = vtoStr ?? '';
+          if (expDate != null) {
+            final day = expDate.day.toString().padLeft(2, '0');
+            final month = expDate.month.toString().padLeft(2, '0');
+            final year = expDate.year.toString();
+            formattedVto = '$day/$month/$year';
+          }
+
           return UserModel(
             dni: dni.trim(),
             fullName: data['nombre'] as String? ?? fullName.trim(),
             affiliateNumber: data['nroAfiliado'] as String? ?? '',
             establishment: data['establecimiento'] as String? ?? '',
             expirationDate: expDate,
-            vtoRaw: vtoStr ?? '',
+            vtoRaw: formattedVto,
           );
         } else {
           throw Exception(
@@ -78,15 +86,17 @@ class AuthRepository {
       affiliateNumber: '000001-00',
       establishment: 'Establecimiento de Prueba',
       expirationDate: DateTime(2026, 12, 31),
+      vtoRaw: '31/12/2026',
     );
   }
 
   /// Convierte strings de fecha en formato "DD/MM/YYYY" o "YYYY-MM-DD" a DateTime.
   DateTime? _parseDate(String raw) {
     try {
+      final cleaned = raw.replaceAll(RegExp(r'\s*\(.*?\)\s*'), '').trim();
       // Formato DD/MM/YYYY (Google Sheets)
-      if (raw.contains('/')) {
-        final parts = raw.split('/');
+      if (cleaned.contains('/')) {
+        final parts = cleaned.split('/');
         if (parts.length == 3) {
           return DateTime(
             int.parse(parts[2]),
@@ -95,8 +105,7 @@ class AuthRepository {
           );
         }
       }
-      // Formato ISO YYYY-MM-DD
-      return DateTime.parse(raw);
+      return DateTime.tryParse(cleaned);
     } catch (_) {
       return null;
     }

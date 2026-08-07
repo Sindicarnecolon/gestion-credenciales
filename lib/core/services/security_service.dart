@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_windowmanager/flutter_windowmanager.dart';
+import 'package:flutter/services.dart';
 
 /// Servicio de seguridad encargado de prevenir capturas de pantalla,
 /// grabación y ocultar el contenido cuando la app pasa a segundo plano.
 class SecurityService {
   SecurityService._();
+
+  static const _channel =
+      MethodChannel('com.antigravity.gestion_credenciales/security');
 
   /// Habilita la protección de seguridad contra screenshots y screen recording.
   static Future<void> enableSecurityProtection() async {
@@ -14,7 +17,7 @@ class SecurityService {
 
       if (Platform.isAndroid) {
         // En Android activa el FLAG_SECURE a nivel de ventana nativa
-        await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
+        await _channel.invokeMethod('enableSecure');
       } else if (Platform.isIOS) {
         // IMPLEMENTACIÓN iOS:
         // En iOS la prevención de screenshots requiere añadir un UITextField
@@ -31,7 +34,7 @@ class SecurityService {
   static Future<void> disableSecurityProtection() async {
     try {
       if (!kIsWeb && Platform.isAndroid) {
-        await FlutterWindowManager.clearFlags(FlutterWindowManager.FLAG_SECURE);
+        await _channel.invokeMethod('disableSecure');
       }
     } catch (e) {
       debugPrint('[SecurityService] Error al remover FLAG_SECURE: $e');
